@@ -9,6 +9,7 @@ import {
   Dimensions,
   TextInput,
   ScrollView,
+  Image,
 } from 'react-native';
 
 import {getPermissionAndroid} from '../helper';
@@ -53,7 +54,6 @@ const PostCreateScreen = () => {
     }
   };
 
-  console.log(height);
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -66,13 +66,69 @@ const PostCreateScreen = () => {
         </LinearGradient>
       </View>
       <View style={styles.mainWrapper}>
-        <Text>Test</Text>
+        <ViewShot style={styles.postWrapper} ref={viewRef}>
+          <View style={styles.postHeader}>
+            <View style={styles.profileImg} />
+            <View style={styles.nameWrapper}>
+              <Text style={{fontWeight: 'bold', color: 'black', fontSize: 18}}>
+                karennne
+              </Text>
+              <Text style={{fontWeight: '200', color: '#687684'}}>
+                @karennne
+              </Text>
+            </View>
+            <Image
+              source={require('../Assets/Icons/ar_down.svg')}
+              style={{width: 30, height: 30}}
+            />
+          </View>
+          <View style={styles.mainPostWrapper}>
+            <Text style={styles.mainPostText}>
+              Here is going main text of the post. Please type something...
+            </Text>
+          </View>
+          <Text>HASHDHASUD</Text>
+        </ViewShot>
+        <TouchableOpacity onPress={() => downloadImage()}>
+          <Text>Save</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  mainPostText: {
+    fontSize: 22,
+    color: 'black',
+  },
+  mainPostWrapper: {
+    width: '100%',
+    flexDirection: 'column',
+    marginBottom: 37,
+  },
+  profileImg: {
+    width: 55,
+    height: 55,
+    borderRadius: 50,
+    backgroundColor: 'gray',
+    marginRight: 8,
+  },
+  postHeader: {
+    width: '100%',
+    height: 55,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 23,
+  },
+  postWrapper: {
+    width: '100%',
+    marginTop: 40,
+    borderRadius: 20,
+    overflow: 'hidden',
+    padding: 20,
+    backgroundColor: 'white',
+  },
   container: {
     width: width,
     height: height,
