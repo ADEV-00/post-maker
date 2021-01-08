@@ -77,17 +77,32 @@ const PostCreateScreen = () => {
                 @karennne
               </Text>
             </View>
-            <Image
-              source={require('../Assets/Icons/ar_down.svg')}
-              style={{width: 30, height: 30}}
-            />
           </View>
           <View style={styles.mainPostWrapper}>
             <Text style={styles.mainPostText}>
               Here is going main text of the post. Please type something...
             </Text>
           </View>
-          <Text>HASHDHASUD</Text>
+          <View style={styles.details}>
+            <Text style={{fontSize: 17, color: '#687684'}}>
+              09:28 · 21/2/20 ·{' '}
+            </Text>
+            <Text style={{fontSize: 17, color: '#4c9eeb'}}>
+              Twitter Web App
+            </Text>
+          </View>
+          <View style={styles.stats}>
+            <Text style={styles.statsText}>
+              6{' '}
+              <Text style={{fontWeight: '200', color: '#687684'}}>
+                Retweets
+              </Text>
+            </Text>
+            <Text style={styles.statsText}>
+              15{' '}
+              <Text style={{fontWeight: '200', color: '#687684'}}>Likes</Text>
+            </Text>
+          </View>
         </ViewShot>
         <TouchableOpacity onPress={() => downloadImage()}>
           <Text>Save</Text>
@@ -98,6 +113,25 @@ const PostCreateScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  statsText: {
+    marginRight: 13,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  stats: {
+    flexDirection: 'row',
+    paddingVertical: 13,
+    alignItems: 'center',
+    borderTopWidth: 0.33,
+    borderBottomWidth: 0.33,
+    borderColor: '#bdc5cd',
+    paddingLeft: 7,
+  },
+  details: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
   mainPostText: {
     fontSize: 22,
     color: 'black',
@@ -128,6 +162,15 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     padding: 20,
     backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   container: {
     width: width,
