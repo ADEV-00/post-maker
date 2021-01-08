@@ -3,46 +3,24 @@ import {
   View,
   Text,
   StyleSheet,
-  PermissionsAndroid,
   Platform,
   Alert,
   TouchableOpacity,
+  Dimensions,
+  TextInput,
 } from 'react-native';
+
+import {getPermissionAndroid} from '../helper';
 
 import ViewShot, {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
 
 const PostCreateScreen = () => {
   const viewRef = useRef();
-
-  //Get Permission
-  const getPermissionAndroid = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-        {
-          title: 'Image Download Permission',
-          message: 'Your permission is required to save images to your device',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        return true;
-      }
-      Alert.alert(
-        '',
-        'Your permission is required to save images to your device',
-        [{text: 'OK', onPress: () => {}}],
-        {cancelable: false},
-      );
-    } catch (err) {
-      console.log('Error', err);
-    }
-  };
+  const {width, height} = Dimensions.get('screen');
+  const [mainText, setMainText] = React.useState('This is the main text');
 
   //Save image to Device
-
   const downloadImage = async () => {
     try {
       // react-native-view-shot caputures component
@@ -57,7 +35,6 @@ const PostCreateScreen = () => {
           return;
         }
       }
-
       // cameraroll saves image
       const image = CameraRoll.save(uri, 'photo');
       if (image) {
@@ -68,7 +45,6 @@ const PostCreateScreen = () => {
           {cancelable: false},
         );
       }
-      console.log(image);
     } catch (error) {
       console.log('error', error);
     }
@@ -79,17 +55,23 @@ const PostCreateScreen = () => {
       style={{
         justifyContent: 'center',
         alignItems: 'center',
-        width: '100%',
-        height: '100%',
+        width: width,
+        height: height,
       }}>
       <ViewShot
         ref={viewRef}
         style={{width: '100%', height: 200, backgroundColor: 'red'}}>
-        <Text style={{fontSize: 50, color: 'white'}}>This is snap view</Text>
+        <Text style={{fontSize: 50, color: 'white'}}>{mainText}</Text>
         <TouchableOpacity onPress={() => downloadImage()}>
           <Text>Save Imgage</Text>
         </TouchableOpacity>
       </ViewShot>
+      <View style={{width: width}}>
+        <TextInput
+          onChangeText={(text) => setMainText(text)}
+          style={{width: '100%', backgroundColor: 'gray'}}
+        />
+      </View>
     </View>
   );
 };
