@@ -11,9 +11,7 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
-
 import {getPermissionAndroid} from '../helper';
-
 import ViewShot, {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
 import LinearGradient from 'react-native-linear-gradient';
@@ -24,6 +22,11 @@ import Comment from '../Assets/Icons/comment';
 import Retweet from '../Assets/Icons/retweet';
 import Like from '../Assets/Icons/like';
 import Share from '../Assets/Icons/share';
+
+//Components
+import ProfileImg from '../Ui/profileImg';
+import MainText from '../Ui/mainTxt';
+import ProfileName from '../Ui/profileName';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -76,25 +79,14 @@ const PostCreateScreen = () => {
       <View style={styles.mainWrapper}>
         <ViewShot style={styles.postWrapper} ref={viewRef}>
           <View style={styles.postHeader}>
-            <View style={styles.profileImg} />
-            <View style={styles.nameWrapper}>
-              <Text style={{fontWeight: 'bold', color: 'black', fontSize: 18}}>
-                karennne
-              </Text>
-              <Text style={{fontWeight: '200', color: '#687684'}}>
-                @karennne
-              </Text>
-            </View>
+            <ProfileImg />
+            <ProfileName name="Random name" />
             <View style={{marginLeft: 'auto'}}>
               <Ar_Down />
             </View>
           </View>
           <View style={styles.mainPostWrapper}>
-            <Text style={styles.mainPostText}>
-              I only ask for two things: {'\n'}
-              Don't make me look stupid {'\n'}
-              Don't treat me like I'm stupid
-            </Text>
+            <MainText contentTxt="This is main content text" />
           </View>
           <View style={styles.details}>
             <Text style={{fontSize: 17, color: '#687684'}}>
@@ -156,22 +148,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 15,
   },
-  mainPostText: {
-    fontSize: 22,
-    color: 'black',
-  },
   mainPostWrapper: {
     width: '100%',
     flexDirection: 'column',
     marginBottom: 37,
   },
-  profileImg: {
-    width: 55,
-    height: 55,
-    borderRadius: 50,
-    backgroundColor: 'gray',
-    marginRight: 8,
-  },
+
   postHeader: {
     width: '100%',
     height: 55,
