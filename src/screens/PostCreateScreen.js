@@ -25,8 +25,11 @@ import Share from '../Assets/Icons/share';
 
 //Components
 import ProfileImg from '../Ui/profileImg';
-import MainText from '../Ui/mainTxt';
 import ProfileName from '../Ui/profileName';
+import MainText from '../Ui/mainTxt';
+import DataTime from '../Ui/dataAndTime';
+import Client from '../Ui/client';
+import Stats from '../Ui/stats';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -89,25 +92,10 @@ const PostCreateScreen = () => {
             <MainText contentTxt="This is main content text" />
           </View>
           <View style={styles.details}>
-            <Text style={{fontSize: 17, color: '#687684'}}>
-              09:28 · 21/2/20 ·{' '}
-            </Text>
-            <Text style={{fontSize: 17, color: '#4c9eeb'}}>
-              Twitter Web App
-            </Text>
+            <DataTime />
+            <Client />
           </View>
-          <View style={styles.stats}>
-            <Text style={styles.statsText}>
-              6{' '}
-              <Text style={{fontWeight: '200', color: '#687684'}}>
-                Retweets
-              </Text>
-            </Text>
-            <Text style={styles.statsText}>
-              15{' '}
-              <Text style={{fontWeight: '200', color: '#687684'}}>Likes</Text>
-            </Text>
-          </View>
+          <Stats />
           <View style={styles.actionIcons}>
             <Comment />
             <Retweet />
@@ -129,20 +117,7 @@ const styles = StyleSheet.create({
     marginTop: 13,
     justifyContent: 'space-around',
   },
-  statsText: {
-    marginRight: 13,
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  stats: {
-    flexDirection: 'row',
-    paddingVertical: 13,
-    alignItems: 'center',
-    borderTopWidth: 0.33,
-    borderBottomWidth: 0.33,
-    borderColor: '#bdc5cd',
-    paddingLeft: 7,
-  },
+
   details: {
     flexDirection: 'row',
     alignItems: 'center',
