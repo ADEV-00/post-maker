@@ -18,6 +18,13 @@ import ViewShot, {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
 import LinearGradient from 'react-native-linear-gradient';
 
+//Icons
+import Ar_Down from '../Assets/Icons/ar_down.js';
+import Comment from '../Assets/Icons/comment';
+import Retweet from '../Assets/Icons/retweet';
+import Like from '../Assets/Icons/like';
+import Share from '../Assets/Icons/share';
+
 const {width, height} = Dimensions.get('screen');
 
 const PostCreateScreen = () => {
@@ -63,6 +70,7 @@ const PostCreateScreen = () => {
           start={{x: 1, y: 0}}
           end={{x: 0, y: 0}}>
           <Text style={styles.headerText}>Post Maker</Text>
+          <View></View>
         </LinearGradient>
       </View>
       <View style={styles.mainWrapper}>
@@ -77,10 +85,15 @@ const PostCreateScreen = () => {
                 @karennne
               </Text>
             </View>
+            <View style={{marginLeft: 'auto'}}>
+              <Ar_Down />
+            </View>
           </View>
           <View style={styles.mainPostWrapper}>
             <Text style={styles.mainPostText}>
-              Here is going main text of the post. Please type something...
+              I only ask for two things: {'\n'}
+              Don't make me look stupid {'\n'}
+              Don't treat me like I'm stupid
             </Text>
           </View>
           <View style={styles.details}>
@@ -103,6 +116,12 @@ const PostCreateScreen = () => {
               <Text style={{fontWeight: '200', color: '#687684'}}>Likes</Text>
             </Text>
           </View>
+          <View style={styles.actionIcons}>
+            <Comment />
+            <Retweet />
+            <Like />
+            <Share />
+          </View>
         </ViewShot>
         <TouchableOpacity onPress={() => downloadImage()}>
           <Text>Save</Text>
@@ -113,6 +132,11 @@ const PostCreateScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  actionIcons: {
+    flexDirection: 'row',
+    marginTop: 13,
+    justifyContent: 'space-around',
+  },
   statsText: {
     marginRight: 13,
     fontSize: 16,
@@ -169,7 +193,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
   container: {
