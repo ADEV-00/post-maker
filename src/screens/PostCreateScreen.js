@@ -118,15 +118,15 @@ const PostCreateScreen = () => {
             </View>
           </View>
           <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Name:</Text>
+            <Text style={styles.label}>Main content:</Text>
             <View style={styles.input}>
               <TextInput
-                placeholder="Type name here..."
+                placeholder="Type main content here..."
                 onChangeText={(text) => setMainText(text)}
+                multiline={true}
               />
             </View>
           </View>
-
           <TouchableOpacity onPress={() => downloadImage()}>
             <Text>Save</Text>
           </TouchableOpacity>
