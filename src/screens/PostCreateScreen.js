@@ -16,6 +16,8 @@ import ViewShot, {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
 import LinearGradient from 'react-native-linear-gradient';
 
+import {title, bgGray} from '../Assets/colors';
+
 //Icons
 import Ar_Down from '../Assets/Icons/ar_down.js';
 import Comment from '../Assets/Icons/comment';
@@ -35,6 +37,7 @@ const {width, height} = Dimensions.get('screen');
 
 const PostCreateScreen = () => {
   const viewRef = useRef();
+  const [name, setName] = React.useState('Random name');
   const [mainText, setMainText] = React.useState('This is the main text');
 
   //Save image to Device
@@ -83,13 +86,13 @@ const PostCreateScreen = () => {
         <ViewShot style={styles.postWrapper} ref={viewRef}>
           <View style={styles.postHeader}>
             <ProfileImg />
-            <ProfileName name="Random name" />
+            <ProfileName name={name} />
             <View style={{marginLeft: 'auto'}}>
               <Ar_Down />
             </View>
           </View>
           <View style={styles.mainPostWrapper}>
-            <MainText contentTxt="This is main content text" />
+            <MainText contentTxt={mainText} />
           </View>
           <View style={styles.details}>
             <DataTime />
@@ -103,15 +106,55 @@ const PostCreateScreen = () => {
             <Share />
           </View>
         </ViewShot>
-        <TouchableOpacity onPress={() => downloadImage()}>
-          <Text>Save</Text>
-        </TouchableOpacity>
+        <View style={styles.optionsWrapper}>
+          <View style={styles.inputWrapper}>
+            <Text style={styles.label}>Name:</Text>
+            <View style={styles.input}>
+              <TextInput
+                placeholder="Type name here..."
+                onChangeText={(name) => setName(name)}
+                maxLength={20}
+              />
+            </View>
+          </View>
+          <View style={styles.inputWrapper}>
+            <Text style={styles.label}>Name:</Text>
+            <View style={styles.input}>
+              <TextInput
+                placeholder="Type name here..."
+                onChangeText={(text) => setMainText(text)}
+              />
+            </View>
+          </View>
+
+          <TouchableOpacity onPress={() => downloadImage()}>
+            <Text>Save</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  label: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: title,
+    marginBottom: 5,
+  },
+  input: {
+    width: '100%',
+    backgroundColor: bgGray,
+    paddingHorizontal: 5,
+    borderRadius: 10,
+  },
+  inputWrapper: {
+    marginBottom: 10,
+  },
+  optionsWrapper: {
+    padding: 20,
+  },
   actionIcons: {
     flexDirection: 'row',
     marginTop: 13,
