@@ -10,11 +10,13 @@ import {
   TextInput,
   ScrollView,
   Image,
+  Button,
 } from 'react-native';
 import {getPermissionAndroid} from '../helper';
 import ViewShot, {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
 import LinearGradient from 'react-native-linear-gradient';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 import {title, bgGray} from '../Assets/colors';
 
@@ -37,8 +39,23 @@ const {width, height} = Dimensions.get('screen');
 
 const PostCreateScreen = () => {
   const viewRef = useRef();
+  const [isTimePickerVisible, setTimePickerVisibility] = React.useState(false);
   const [name, setName] = React.useState('Random name');
   const [mainText, setMainText] = React.useState('This is the main text');
+  const [time, setTime] = React.useState('06:15');
+
+  //handle Time picker
+  const showTimePicker = () => {
+    setTimePickerVisibility(true);
+  };
+  const hideTimePicker = () => {
+    setTimePickerVisibility(false);
+  };
+  const handleConfirm = (date) => {
+    const time = date.toLocaleTimeString();
+    setTime(time.substring(0, 5));
+    hideTimePicker();
+  };
 
   //Save image to Device
   const downloadImage = async () => {
@@ -71,7 +88,7 @@ const PostCreateScreen = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
         <LinearGradient
           colors={['#292B4D', '#545671']}
@@ -95,7 +112,7 @@ const PostCreateScreen = () => {
             <MainText contentTxt={mainText} />
           </View>
           <View style={styles.details}>
-            <DataTime />
+            <DataTime time={time} />
             <Client />
           </View>
           <Stats />
@@ -130,6 +147,19 @@ const PostCreateScreen = () => {
           <TouchableOpacity onPress={() => downloadImage()}>
             <Text>Save</Text>
           </TouchableOpacity>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <Button title="Set Time" onPress={showTimePicker} />
+            <DateTimePickerModal
+              isVisible={isTimePickerVisible}
+              mode="time"
+              onConfirm={handleConfirm}
+              onCancel={hideTimePicker}
+            />
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -225,7 +255,7 @@ const styles = StyleSheet.create({
         translateY: -40,
       },
     ],
-    minHeight: height,
+    minHeight: height / 2,
     backgroundColor: 'white',
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
