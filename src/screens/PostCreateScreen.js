@@ -18,7 +18,7 @@ import CameraRoll from '@react-native-community/cameraroll';
 import LinearGradient from 'react-native-linear-gradient';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
-import {title, bgGray} from '../Assets/colors';
+import {title, bgGray, mainBlue} from '../Assets/colors';
 
 //Icons
 import Ar_Down from '../Assets/Icons/ar_down.js';
@@ -144,22 +144,47 @@ const PostCreateScreen = () => {
               />
             </View>
           </View>
+
+          <View style={styles.inputWrapper}>
+            <Text style={styles.label}>Time and Date</Text>
+            <View style={{flexDirection: 'row'}}>
+              <View style={{marginRight: 10}}>
+                <TouchableOpacity
+                  style={styles.btnTimeDate}
+                  onPress={showTimePicker}>
+                  <Text
+                    style={{fontSize: 18, color: mainBlue, fontWeight: 'bold'}}>
+                    Set Time
+                  </Text>
+                </TouchableOpacity>
+                <DateTimePickerModal
+                  isVisible={isTimePickerVisible}
+                  mode="time"
+                  onConfirm={handleConfirm}
+                  onCancel={hideTimePicker}
+                />
+              </View>
+              <View style={{marginRight: 10}}>
+                <TouchableOpacity
+                  style={styles.btnTimeDate}
+                  onPress={showTimePicker}>
+                  <Text
+                    style={{fontSize: 18, color: mainBlue, fontWeight: 'bold'}}>
+                    Set Date
+                  </Text>
+                </TouchableOpacity>
+                <DateTimePickerModal
+                  isVisible={isTimePickerVisible}
+                  mode="time"
+                  onConfirm={handleConfirm}
+                  onCancel={hideTimePicker}
+                />
+              </View>
+            </View>
+          </View>
           <TouchableOpacity onPress={() => downloadImage()}>
             <Text>Save</Text>
           </TouchableOpacity>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Button title="Set Time" onPress={showTimePicker} />
-            <DateTimePickerModal
-              isVisible={isTimePickerVisible}
-              mode="time"
-              onConfirm={handleConfirm}
-              onCancel={hideTimePicker}
-            />
-          </View>
         </View>
       </View>
     </ScrollView>
@@ -167,6 +192,20 @@ const PostCreateScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  btnTimeDate: {
+    backgroundColor: '#FDFDFD',
+    paddingHorizontal: 10,
+    paddingVertical: 12,
+    borderRadius: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4.65,
+    elevation: 4,
+  },
   label: {
     fontSize: 18,
     fontWeight: 'bold',
