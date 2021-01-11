@@ -40,9 +40,11 @@ const {width, height} = Dimensions.get('screen');
 const PostCreateScreen = () => {
   const viewRef = useRef();
   const [isTimePickerVisible, setTimePickerVisibility] = React.useState(false);
+  const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
   const [name, setName] = React.useState('Random name');
   const [mainText, setMainText] = React.useState('This is the main text');
   const [time, setTime] = React.useState('06:15');
+  const [date, setDate] = React.useState();
 
   //handle Time picker
   const showTimePicker = () => {
@@ -50,11 +52,21 @@ const PostCreateScreen = () => {
   };
   const hideTimePicker = () => {
     setTimePickerVisibility(false);
+    setDatePickerVisibility(false);
   };
   const handleConfirm = (date) => {
     const time = date.toLocaleTimeString();
     setTime(time.substring(0, 5));
     hideTimePicker();
+  };
+
+  const handleConfirmDate = (date) => {
+    setDate(date.toLocaleDateString());
+    hideTimePicker();
+  };
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
   };
 
   //Save image to Device
@@ -112,7 +124,7 @@ const PostCreateScreen = () => {
             <MainText contentTxt={mainText} />
           </View>
           <View style={styles.details}>
-            <DataTime time={time} />
+            <DataTime time={time} date={date} />
             <Client />
           </View>
           <Stats />
@@ -167,17 +179,18 @@ const PostCreateScreen = () => {
               <View style={{marginRight: 10}}>
                 <TouchableOpacity
                   style={styles.btnTimeDate}
-                  onPress={showTimePicker}>
+                  onPress={showDatePicker}>
                   <Text
                     style={{fontSize: 18, color: mainBlue, fontWeight: 'bold'}}>
                     Set Date
                   </Text>
                 </TouchableOpacity>
                 <DateTimePickerModal
-                  isVisible={isTimePickerVisible}
-                  mode="time"
-                  onConfirm={handleConfirm}
+                  isVisible={isDatePickerVisible}
+                  mode="date"
+                  onConfirm={handleConfirmDate}
                   onCancel={hideTimePicker}
+                  locale="en_GB"
                 />
               </View>
             </View>

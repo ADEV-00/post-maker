@@ -2,11 +2,11 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {defaultGray} from '../Assets/colors';
 
-const DataTime = ({time}) => {
+const DataTime = ({time, date}) => {
   return (
     <View>
       <Text style={{fontSize: 17, color: defaultGray}}>
-        {time} · 21/2/20 ·{' '}
+        {time} · {date} ·{' '}
       </Text>
     </View>
   );
