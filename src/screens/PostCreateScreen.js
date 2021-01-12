@@ -17,8 +17,9 @@ import ViewShot, {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
 import LinearGradient from 'react-native-linear-gradient';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import RNPickerSelect, {defaultStyles} from 'react-native-picker-select';
 
-import {title, bgGray, mainBlue} from '../Assets/colors';
+import {title, bgGray, mainBlue, shadow} from '../Assets/colors';
 
 //Icons
 import Ar_Down from '../Assets/Icons/ar_down.js';
@@ -44,7 +45,8 @@ const PostCreateScreen = () => {
   const [name, setName] = React.useState('Random name');
   const [mainText, setMainText] = React.useState('This is the main text');
   const [time, setTime] = React.useState('06:15');
-  const [date, setDate] = React.useState();
+  const [date, setDate] = React.useState('6/6/20');
+  const [client, setClient] = React.useState();
 
   //handle Time picker
   const showTimePicker = () => {
@@ -125,7 +127,7 @@ const PostCreateScreen = () => {
           </View>
           <View style={styles.details}>
             <DataTime time={time} date={date} />
-            <Client />
+            <Client client={client} />
           </View>
           <Stats />
           <View style={styles.actionIcons}>
@@ -195,6 +197,30 @@ const PostCreateScreen = () => {
               </View>
             </View>
           </View>
+          <View style={styles.inputWrapper}>
+            <Text style={styles.label}>Choose a Client</Text>
+            <RNPickerSelect
+              style={{
+                ...pickerSelectStyles,
+                viewContainer: {
+                  width: '70%',
+                  backgroundColor: bgGray,
+                  borderRadius: 10,
+                  ...shadow,
+                },
+              }}
+              onValueChange={(value) => setClient(value)}
+              placeholder={{
+                label: 'Select a client...',
+                value: null,
+              }}
+              items={[
+                {label: 'Twitter Web App', value: 'Twitter Web App'},
+                {label: 'Twitter for iPhone', value: 'Twitter for iPhone'},
+                {label: 'Twitter for Android', value: 'Twitter for Android'},
+              ]}
+            />
+          </View>
           <TouchableOpacity onPress={() => downloadImage()}>
             <Text>Save</Text>
           </TouchableOpacity>
@@ -210,14 +236,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 12,
     borderRadius: 5,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 4.65,
-    elevation: 4,
+    ...shadow,
   },
   label: {
     fontSize: 18,
@@ -311,6 +330,29 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
+  },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 4,
+    color: 'black',
+    paddingRight: 30,
+  },
+  inputAndroid: {
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderWidth: 1,
+    borderColor: 'purple',
+    borderRadius: 8,
+    color: 'black',
+    paddingRight: 30,
   },
 });
 
