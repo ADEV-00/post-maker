@@ -1,14 +1,15 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const Stats = () => {
+const Stats = ({retweet, like}) => {
   return (
     <View style={styles.stats}>
       <Text style={styles.statsText}>
-        6 <Text style={{fontWeight: '200', color: '#687684'}}>Retweets</Text>
+        {retweet}{' '}
+        <Text style={{fontWeight: '200', color: '#687684'}}>Retweets</Text>
       </Text>
       <Text style={styles.statsText}>
-        15 <Text style={{fontWeight: '200', color: '#687684'}}>Likes</Text>
+        {like} <Text style={{fontWeight: '200', color: '#687684'}}>Likes</Text>
       </Text>
     </View>
   );

@@ -17,8 +17,10 @@ import ViewShot, {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
 import LinearGradient from 'react-native-linear-gradient';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import RNPickerSelect, {defaultStyles} from 'react-native-picker-select';
+import RNPickerSelect from 'react-native-picker-select';
+import NumericInput from 'react-native-numeric-input';
 
+//Style
 import {title, bgGray, mainBlue, shadow} from '../Assets/colors';
 
 //Icons
@@ -47,8 +49,10 @@ const PostCreateScreen = () => {
   const [time, setTime] = React.useState('06:15');
   const [date, setDate] = React.useState('6/6/20');
   const [client, setClient] = React.useState();
+  const [retweet, setRetweet] = React.useState(0);
+  const [like, setLike] = React.useState(0);
 
-  //handle Time picker
+  //handle Time and Datepicker
   const showTimePicker = () => {
     setTimePickerVisibility(true);
   };
@@ -61,12 +65,10 @@ const PostCreateScreen = () => {
     setTime(time.substring(0, 5));
     hideTimePicker();
   };
-
   const handleConfirmDate = (date) => {
     setDate(date.toLocaleDateString());
     hideTimePicker();
   };
-
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -129,7 +131,7 @@ const PostCreateScreen = () => {
             <DataTime time={time} date={date} />
             <Client client={client} />
           </View>
-          <Stats />
+          <Stats retweet={retweet} like={like} />
           <View style={styles.actionIcons}>
             <Comment />
             <Retweet />
@@ -219,6 +221,42 @@ const PostCreateScreen = () => {
                 {label: 'Twitter for iPhone', value: 'Twitter for iPhone'},
                 {label: 'Twitter for Android', value: 'Twitter for Android'},
               ]}
+            />
+          </View>
+          <View style={styles.inputWrapper}>
+            <Text style={styles.label}>Retweets</Text>
+            <NumericInput
+              onChange={(value) => setRetweet(value)}
+              totalWidth={160}
+              totalHeight={50}
+              iconSize={25}
+              valueType="real"
+              rounded
+              textColor={mainBlue}
+              iconStyle={{color: 'white'}}
+              rightButtonBackgroundColor={mainBlue}
+              leftButtonBackgroundColor={mainBlue}
+              containerStyle={{
+                backgroundColor: bgGray,
+              }}
+            />
+          </View>
+          <View style={styles.inputWrapper}>
+            <Text style={styles.label}>Likes</Text>
+            <NumericInput
+              onChange={(value) => setLike(value)}
+              totalWidth={160}
+              totalHeight={50}
+              iconSize={25}
+              valueType="real"
+              rounded
+              textColor={mainBlue}
+              iconStyle={{color: 'white'}}
+              rightButtonBackgroundColor={mainBlue}
+              leftButtonBackgroundColor={mainBlue}
+              containerStyle={{
+                backgroundColor: bgGray,
+              }}
             />
           </View>
           <TouchableOpacity onPress={() => downloadImage()}>
