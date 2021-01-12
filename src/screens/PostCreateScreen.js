@@ -297,6 +297,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   container: {
+    flex: 1,
     width: width,
     height: height,
     flexDirection: 'column',
