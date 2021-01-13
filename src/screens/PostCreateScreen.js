@@ -21,7 +21,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import NumericInput from 'react-native-numeric-input';
 
 //Style
-import {title, bgGray, mainBlue, shadow} from '../Assets/colors';
+import {title, bgGray, mainBlue, shadow, activeGreen} from '../Assets/colors';
 
 //Icons
 import Ar_Down from '../Assets/Icons/ar_down.js';
@@ -37,6 +37,7 @@ import MainText from '../Ui/mainTxt';
 import DataTime from '../Ui/dataAndTime';
 import Client from '../Ui/client';
 import Stats from '../Ui/stats';
+import PostImage from '../Ui/image';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -127,6 +128,7 @@ const PostCreateScreen = () => {
           <View style={styles.mainPostWrapper}>
             <MainText contentTxt={mainText} />
           </View>
+          <PostImage />
           <View style={styles.details}>
             <DataTime time={time} date={date} />
             <Client client={client} />
@@ -259,8 +261,13 @@ const PostCreateScreen = () => {
               }}
             />
           </View>
-          <TouchableOpacity onPress={() => downloadImage()}>
-            <Text>Save</Text>
+          <TouchableOpacity
+            onPress={() => downloadImage()}
+            style={styles.btnSave}>
+            <Text
+              style={{color: activeGreen, fontSize: 18, fontWeight: 'bold'}}>
+              Save
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -269,6 +276,18 @@ const PostCreateScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  btnSave: {
+    backgroundColor: '#FDFDFD',
+    width: 100,
+    minHeight: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    ...shadow,
+    margin: 30,
+    borderWidth: 0.3,
+    borderColor: activeGreen,
+  },
   btnTimeDate: {
     backgroundColor: '#FDFDFD',
     paddingHorizontal: 10,
