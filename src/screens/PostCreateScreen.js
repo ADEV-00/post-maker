@@ -11,6 +11,7 @@ import {
   ScrollView,
   Image,
   Button,
+  Pressable,
 } from 'react-native';
 import {getPermissionAndroid} from '../helper';
 import ViewShot, {captureRef} from 'react-native-view-shot';
@@ -19,6 +20,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import NumericInput from 'react-native-numeric-input';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 //Style
 import {title, bgGray, mainBlue, shadow, activeGreen} from '../Assets/colors';
@@ -52,6 +54,7 @@ const PostCreateScreen = () => {
   const [client, setClient] = React.useState();
   const [retweet, setRetweet] = React.useState(0);
   const [like, setLike] = React.useState(0);
+  const [textAlign, setTextAlign] = React.useState('justify');
 
   //handle Time and Datepicker
   const showTimePicker = () => {
@@ -126,7 +129,7 @@ const PostCreateScreen = () => {
             </View>
           </View>
           <View style={styles.mainPostWrapper}>
-            <MainText contentTxt={mainText} />
+            <MainText contentTxt={mainText} align={textAlign} />
           </View>
           <PostImage />
           <View style={styles.details}>
@@ -162,7 +165,33 @@ const PostCreateScreen = () => {
               />
             </View>
           </View>
+          <View style={styles.inputWrapper}>
+            <Text style={styles.label}>Main text align</Text>
 
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+              <Pressable onPress={() => setTextAlign('left')}>
+                <View style={styles.btnTimeDate}>
+                  <Icon name="align-left" size={22} color={mainBlue} />
+                </View>
+              </Pressable>
+              <Pressable onPress={() => setTextAlign('center')}>
+                <View style={styles.btnTimeDate}>
+                  <Icon name="align-center" size={22} color={mainBlue} />
+                </View>
+              </Pressable>
+              <Pressable onPress={() => setTextAlign('justify')}>
+                <View style={styles.btnTimeDate}>
+                  <Icon name="align-justify" size={22} color={mainBlue} />
+                </View>
+              </Pressable>
+              <Pressable onPress={() => setTextAlign('right')}>
+                <View style={styles.btnTimeDate}>
+                  <Icon name="align-right" size={22} color={mainBlue} />
+                </View>
+              </Pressable>
+            </View>
+          </View>
           <View style={styles.inputWrapper}>
             <Text style={styles.label}>Time and Date</Text>
             <View style={{flexDirection: 'row'}}>

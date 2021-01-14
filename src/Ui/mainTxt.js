@@ -1,10 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const MainText = ({contentTxt}) => {
+const MainText = ({contentTxt, align}) => {
   return (
     <View>
-      <Text style={styles.mainPostText}>{contentTxt}</Text>
+      <Text style={[styles.mainPostText, {textAlign: `${align}`}]}>
+        {contentTxt}
+      </Text>
     </View>
   );
 };
