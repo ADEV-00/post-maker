@@ -21,6 +21,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import NumericInput from 'react-native-numeric-input';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Share from 'react-native-share';
 
 //Style
 import {title, bgGray, mainBlue, shadow, activeGreen} from '../Assets/colors';
@@ -30,7 +31,7 @@ import Ar_Down from '../Assets/Icons/ar_down.js';
 import Comment from '../Assets/Icons/comment';
 import Retweet from '../Assets/Icons/retweet';
 import Like from '../Assets/Icons/like';
-import Share from '../Assets/Icons/share';
+import ShareIcon from '../Assets/Icons/share';
 
 //Components
 import ProfileImg from '../Ui/profileImg';
@@ -107,6 +108,21 @@ const PostCreateScreen = () => {
     }
   };
 
+  const shareImage = async () => {
+    try {
+      // capture component
+      const uri = await captureRef(viewRef, {
+        format: 'png',
+        quality: 0.8,
+      });
+
+      // share
+      const shareResponse = await Share.open({url: uri});
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
@@ -141,7 +157,7 @@ const PostCreateScreen = () => {
             <Comment />
             <Retweet />
             <Like />
-            <Share />
+            <ShareIcon />
           </View>
         </ViewShot>
         <View style={styles.optionsWrapper}>
@@ -296,6 +312,12 @@ const PostCreateScreen = () => {
             <Text
               style={{color: activeGreen, fontSize: 18, fontWeight: 'bold'}}>
               Save
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => shareImage()} style={styles.btnSave}>
+            <Text
+              style={{color: activeGreen, fontSize: 18, fontWeight: 'bold'}}>
+              Share
             </Text>
           </TouchableOpacity>
         </View>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Svg, {Path} from 'react-native-svg';
 import {TouchableOpacity} from 'react-native';
 
-function Share(props) {
+function ShareIcon(props) {
   return (
     <TouchableOpacity>
       <Svg
@@ -23,4 +23,4 @@ function Share(props) {
   );
 }
 
-export default Share;
+export default ShareIcon;
