@@ -306,20 +306,31 @@ const PostCreateScreen = () => {
               }}
             />
           </View>
-          <TouchableOpacity
-            onPress={() => downloadImage()}
-            style={styles.btnSave}>
-            <Text
-              style={{color: activeGreen, fontSize: 18, fontWeight: 'bold'}}>
-              Save
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => shareImage()} style={styles.btnSave}>
-            <Text
-              style={{color: activeGreen, fontSize: 18, fontWeight: 'bold'}}>
-              Share
-            </Text>
-          </TouchableOpacity>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginTop: 20,
+              justifyContent: 'space-around',
+            }}>
+            <TouchableOpacity
+              onPress={() => downloadImage()}
+              style={styles.btnSave}>
+              <Text
+                style={{
+                  color: activeGreen,
+                  fontSize: 18,
+                  fontWeight: 'bold',
+                }}>
+                Save
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => shareImage()}
+              style={styles.btnShare}>
+              <Icon name="share" size={22} color={mainBlue} />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -335,9 +346,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
     ...shadow,
-    margin: 30,
     borderWidth: 0.3,
     borderColor: activeGreen,
+  },
+  btnShare: {
+    backgroundColor: '#fdfdfd',
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+    ...shadow,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   btnTimeDate: {
     backgroundColor: '#FDFDFD',
