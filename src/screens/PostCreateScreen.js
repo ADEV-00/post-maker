@@ -12,6 +12,7 @@ import {
   Image,
   Button,
   Pressable,
+  PermissionsAndroid,
 } from 'react-native';
 import {getPermissionAndroid} from '../helper';
 import ViewShot, {captureRef} from 'react-native-view-shot';
@@ -76,6 +77,21 @@ const PostCreateScreen = () => {
   };
   const showDatePicker = () => {
     setDatePickerVisibility(true);
+  };
+
+  const getPermission = async () => {
+    await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      {
+        title: 'Cool Photo App Camera Permission',
+        message:
+          'Cool Photo App needs access to your camera ' +
+          'so you can take awesome pictures.',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    );
   };
 
   //Save image to Device
@@ -326,7 +342,7 @@ const PostCreateScreen = () => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => shareImage()}
+              onPress={() => getPermission()}
               style={styles.btnShare}>
               <Icon name="share" size={22} color={mainBlue} />
             </TouchableOpacity>
