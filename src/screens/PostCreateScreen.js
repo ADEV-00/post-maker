@@ -23,6 +23,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import NumericInput from 'react-native-numeric-input';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Share from 'react-native-share';
+import CheckBox from '@react-native-community/checkbox';
 
 //Style
 import {title, bgGray, mainBlue, shadow, activeGreen} from '../Assets/colors';
@@ -57,6 +58,7 @@ const PostCreateScreen = () => {
   const [retweet, setRetweet] = React.useState(0);
   const [like, setLike] = React.useState(0);
   const [textAlign, setTextAlign] = React.useState('justify');
+  const [dataTimeCheckbox, setDateTimeCheckbox] = React.useState(true);
 
   //handle Time and Datepicker
   const showTimePicker = () => {
@@ -161,7 +163,7 @@ const PostCreateScreen = () => {
           </View>
           <PostImage />
           <View style={styles.details}>
-            <DataTime time={time} date={date} />
+            <DataTime time={time} date={date} display={dataTimeCheckbox} />
             <Client client={client} />
           </View>
           <Stats retweet={retweet} like={like} />
@@ -222,7 +224,7 @@ const PostCreateScreen = () => {
           </View>
           <View style={styles.inputWrapper}>
             <Text style={styles.label}>Time and Date</Text>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <View style={{marginRight: 10}}>
                 <TouchableOpacity
                   style={styles.btnTimeDate}
@@ -254,6 +256,13 @@ const PostCreateScreen = () => {
                   onConfirm={handleConfirmDate}
                   onCancel={hideTimePicker}
                   locale="en_GB"
+                />
+              </View>
+              <View>
+                <CheckBox
+                  value={dataTimeCheckbox}
+                  onValueChange={(newValue) => setDateTimeCheckbox(newValue)}
+                  onCheckColor={mainBlue}
                 />
               </View>
             </View>

@@ -2,9 +2,11 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {defaultGray} from '../Assets/colors';
 
-const DataTime = ({time, date}) => {
+const DataTime = ({time, date, display}) => {
+  const displayHandle = display ? 'flex' : 'none';
+
   return (
-    <View>
+    <View style={{display: displayHandle}}>
       <Text style={{fontSize: 17, color: defaultGray}}>
         {time} · {date} ·{' '}
       </Text>
