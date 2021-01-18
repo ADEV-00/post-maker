@@ -14,7 +14,7 @@ import {
   Pressable,
   PermissionsAndroid,
 } from 'react-native';
-import {getPermissionAndroid} from '../helper';
+import {checkAndroidPermission} from '../helper';
 import ViewShot, {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
 import LinearGradient from 'react-native-linear-gradient';
@@ -97,20 +97,17 @@ const PostCreateScreen = () => {
   //Save image to Device
   const downloadImage = async () => {
     try {
+      if (Platform.OS === 'android') {
+        await checkAndroidPermission();
+      }
       // react-native-view-shot caputures component
       const uri = await captureRef(viewRef, {
         format: 'png',
         quality: 0.8,
       });
 
-      if (Platform.OS === 'android') {
-        const granted = await getPermissionAndroid();
-        if (!granted) {
-          return;
-        }
-      }
       // cameraroll saves image
-      const image = CameraRoll.save(uri, 'photo');
+      const image = CameraRoll.save(uri, 'Photo');
       if (image) {
         Alert.alert(
           '',
@@ -131,7 +128,6 @@ const PostCreateScreen = () => {
         format: 'png',
         quality: 0.8,
       });
-
       // share
       const shareResponse = await Share.open({url: uri});
     } catch (err) {
@@ -342,7 +338,7 @@ const PostCreateScreen = () => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => getPermission()}
+              onPress={() => shareImage()}
               style={styles.btnShare}>
               <Icon name="share" size={22} color={mainBlue} />
             </TouchableOpacity>
