@@ -59,7 +59,8 @@ const PostCreateScreen = () => {
   const [like, setLike] = React.useState(0);
   const [textAlign, setTextAlign] = React.useState('justify');
   const [dataTimeCheckbox, setDateTimeCheckbox] = React.useState(true);
-
+  const [displayIcons, setDisplayIcons] = React.useState(true);
+  const handleDisplayIcons = displayIcons ? 'flex' : 'none';
   //handle Time and Datepicker
   const showTimePicker = () => {
     setTimePickerVisibility(true);
@@ -167,7 +168,7 @@ const PostCreateScreen = () => {
             <Client client={client} />
           </View>
           <Stats retweet={retweet} like={like} />
-          <View style={styles.actionIcons}>
+          <View style={[styles.actionIcons, {display: handleDisplayIcons}]}>
             <Comment />
             <Retweet />
             <Like />
@@ -326,6 +327,15 @@ const PostCreateScreen = () => {
                 backgroundColor: bgGray,
               }}
             />
+          </View>
+          <View style={styles.inputWrapper}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={styles.label}>Display Icons:</Text>
+              <CheckBox
+                value={displayIcons}
+                onValueChange={(newValue) => setDisplayIcons(newValue)}
+              />
+            </View>
           </View>
           <View
             style={{
