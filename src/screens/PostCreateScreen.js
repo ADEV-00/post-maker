@@ -20,7 +20,7 @@ import CameraRoll from '@react-native-community/cameraroll';
 import LinearGradient from 'react-native-linear-gradient';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import RNPickerSelect from 'react-native-picker-select';
-import NumericInput from 'react-native-numeric-input';
+import NumericInput from 'rn-numeric-input';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Share from 'react-native-share';
 import CheckBox from '@react-native-community/checkbox';
