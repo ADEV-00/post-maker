@@ -61,6 +61,7 @@ const PostCreateScreen = () => {
   const [dataTimeCheckbox, setDateTimeCheckbox] = React.useState(true);
   const [displayIcons, setDisplayIcons] = React.useState(true);
   const handleDisplayIcons = displayIcons ? 'flex' : 'none';
+  const [displayStats, setDisplayStats] = React.useState(true);
   //handle Time and Datepicker
   const showTimePicker = () => {
     setTimePickerVisibility(true);
@@ -167,7 +168,8 @@ const PostCreateScreen = () => {
             <DataTime time={time} date={date} display={dataTimeCheckbox} />
             <Client client={client} />
           </View>
-          <Stats retweet={retweet} like={like} />
+          {displayStats ? <Stats retweet={retweet} like={like} /> : null}
+
           <View style={[styles.actionIcons, {display: handleDisplayIcons}]}>
             <Comment />
             <Retweet />
@@ -327,6 +329,15 @@ const PostCreateScreen = () => {
                 backgroundColor: bgGray,
               }}
             />
+          </View>
+          <View style={styles.inputWrapper}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={styles.label}>Display Likes and Retweets:</Text>
+              <CheckBox
+                value={displayStats}
+                onValueChange={(newValue) => setDisplayStats(newValue)}
+              />
+            </View>
           </View>
           <View style={styles.inputWrapper}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
