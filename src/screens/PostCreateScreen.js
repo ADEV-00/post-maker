@@ -25,6 +25,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Share from 'react-native-share';
 import CheckBox from '@react-native-community/checkbox';
 
+import {getRandomQuote} from '../Api/randomQuote';
+
 //Style
 import {title, bgGray, mainBlue, shadow, activeGreen} from '../Assets/colors';
 
@@ -139,6 +141,11 @@ const PostCreateScreen = () => {
     }
   };
 
+  const setRadnomQuote = async () => {
+    const quote = await getRandomQuote();
+    setMainText(quote);
+  };
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
@@ -195,8 +202,24 @@ const PostCreateScreen = () => {
                 placeholder="Type main content here..."
                 onChangeText={(text) => setMainText(text)}
                 multiline={true}
+                value={mainText}
               />
             </View>
+          </View>
+          <View style={styles.inputWrapper}>
+            <TouchableOpacity
+              style={styles.btnTimeDate}
+              onPress={setRadnomQuote}>
+              <Text
+                style={{
+                  color: mainBlue,
+                  fontWeight: 'bold',
+                  fontSize: 18,
+                  textAlign: 'center',
+                }}>
+                Get random qoute
+              </Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.inputWrapper}>
             <Text style={styles.label}>Main text align</Text>
