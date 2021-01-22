@@ -24,7 +24,7 @@ import NumericInput from 'rn-numeric-input';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Share from 'react-native-share';
 import CheckBox from '@react-native-community/checkbox';
-
+//API
 import {getRandomQuote} from '../Api/randomQuote';
 
 //Style
